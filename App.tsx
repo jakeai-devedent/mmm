@@ -1,9 +1,9 @@
 
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import Sidebar from './components/Sidebar.tsx';
-import { EditorTool, ImageHistory } from './types.ts';
-import { generateImage, editImage, upscaleImage, removeBackground, eraseObject } from './services/geminiService.ts';
-import { UploadIcon, DownloadIcon, LoaderIcon } from './components/Icons.tsx';
+import Sidebar from './components/Sidebar';
+import { EditorTool, ImageHistory } from './types';
+import { generateImage, editImage, upscaleImage, removeBackground, eraseObject } from './services/geminiService';
+import { UploadIcon, DownloadIcon, LoaderIcon } from './components/Icons';
 
 const App: React.FC = () => {
   const [currentImage, setCurrentImage] = useState<string | null>(null);
@@ -50,7 +50,6 @@ const App: React.FC = () => {
     const clientX = 'touches' in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
     const clientY = 'touches' in e ? e.touches[0].clientY : (e as React.MouseEvent).clientY;
     
-    // Calculate scale factor in case image is zoomed/resized
     const scaleX = canvas.width / rect.width;
     const scaleY = canvas.height / rect.height;
 
@@ -70,7 +69,7 @@ const App: React.FC = () => {
       ctx.moveTo(pos.x, pos.y);
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
-      ctx.strokeStyle = 'rgba(239, 68, 68, 0.6)'; // Red semi-transparent for visibility
+      ctx.strokeStyle = 'rgba(239, 68, 68, 0.6)';
       ctx.lineWidth = brushSize;
       ctx.lineTo(pos.x, pos.y);
       ctx.stroke();

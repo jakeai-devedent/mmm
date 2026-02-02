@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import { EditorTool } from '../types.ts';
-import { SparklesIcon, EraserIcon, MaximizeIcon, ImageIcon, WandIcon } from './Icons.tsx';
+import { EditorTool } from '../types';
+import { SparklesIcon, EraserIcon, MaximizeIcon, ImageIcon, WandIcon } from './Icons';
 
 interface SidebarProps {
   activeTool: EditorTool;
