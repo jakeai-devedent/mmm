@@ -1,9 +1,9 @@
 
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import Sidebar from './components/Sidebar';
-import { EditorTool, ImageHistory } from './types';
-import { generateImage, editImage, upscaleImage, removeBackground, eraseObject } from './services/geminiService';
-import { UploadIcon, DownloadIcon, LoaderIcon } from './components/Icons';
+import Sidebar from './components/Sidebar.tsx';
+import { EditorTool, ImageHistory } from './types.ts';
+import { generateImage, editImage, upscaleImage, removeBackground, eraseObject } from './services/geminiService.ts';
+import { UploadIcon, DownloadIcon, LoaderIcon } from './components/Icons.tsx';
 
 const App: React.FC = () => {
   const [currentImage, setCurrentImage] = useState<string | null>(null);
@@ -109,8 +109,6 @@ const App: React.FC = () => {
   const handleErase = async (description: string) => {
     if (!currentImage) return;
     setIsProcessing(true);
-    // In a real sophisticated inpainting, we'd send the mask data too. 
-    // Here we use the description and visual cues for Gemini.
     const result = await eraseObject(currentImage, description);
     if (result) addImageToHistory(result, `Erased ${description}`);
     setIsProcessing(false);
@@ -152,7 +150,6 @@ const App: React.FC = () => {
     link.click();
   };
 
-  // Synchronize canvas size with displayed image size
   const onImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const img = e.currentTarget;
     if (maskCanvasRef.current) {
@@ -179,7 +176,6 @@ const App: React.FC = () => {
       />
 
       <main className="flex-1 flex flex-col relative bg-zinc-950 canvas-bg">
-        {/* Header Bar */}
         <div className="h-16 border-b border-zinc-900 bg-zinc-950/80 backdrop-blur-md flex items-center justify-between px-6 z-30">
           <div className="flex items-center space-x-4">
             <button 
@@ -211,7 +207,6 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        {/* Main Canvas Area */}
         <div className="flex-1 flex items-center justify-center p-8 relative overflow-hidden" ref={containerRef}>
           {isProcessing && (
             <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
@@ -238,7 +233,6 @@ const App: React.FC = () => {
                 style={{ pointerEvents: 'none' }}
               />
               
-              {/* Drawing Layer */}
               <canvas
                 ref={maskCanvasRef}
                 onMouseDown={startDrawing}
@@ -271,7 +265,6 @@ const App: React.FC = () => {
           )}
         </div>
 
-        {/* History / Versions Bar */}
         <div className="h-32 border-t border-zinc-900 bg-zinc-950/95 flex items-center px-8 space-x-8 overflow-x-auto z-30">
           <div className="flex-none">
             <div className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.3em] mb-3">Snapshots</div>
