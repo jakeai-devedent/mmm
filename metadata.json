@@ -1,0 +1,7 @@
+{
+  "name": "Lumina AI Studio",
+  "description": "A world-class AI-powered image editor featuring advanced generation, background removal, object erasing, and intelligent upscaling using the Gemini API.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
