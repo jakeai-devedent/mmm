@@ -1,9 +1,9 @@
 
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import Sidebar from './components/Sidebar';
-import { EditorTool, ImageHistory } from './types';
-import { generateImage, editImage, upscaleImage, removeBackground, eraseObject } from './services/geminiService';
-import { UploadIcon, DownloadIcon, LoaderIcon } from './components/Icons';
+import Sidebar from './components/Sidebar.tsx';
+import { EditorTool, ImageHistory } from './types.ts';
+import { generateImage, editImage, upscaleImage, removeBackground, eraseObject } from './services/geminiService.ts';
+import { UploadIcon, DownloadIcon, LoaderIcon } from './components/Icons.tsx';
 
 const App: React.FC = () => {
   const [currentImage, setCurrentImage] = useState<string | null>(null);
