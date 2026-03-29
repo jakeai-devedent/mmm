@@ -17,6 +17,14 @@ const App: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
 
+  const clearMask = () => {
+    const canvas = maskCanvasRef.current;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  };
+
   const addImageToHistory = useCallback((url: string, prompt?: string) => {
     const newItem: ImageHistory = {
       id: Math.random().toString(36).substr(2, 9),
@@ -28,14 +36,6 @@ const App: React.FC = () => {
     setCurrentImage(url);
     clearMask();
   }, []);
-
-  const clearMask = () => {
-    const canvas = maskCanvasRef.current;
-    if (canvas) {
-      const ctx = canvas.getContext('2d');
-      if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-  };
 
   useEffect(() => {
     if (activeTool !== EditorTool.ERASE) {
